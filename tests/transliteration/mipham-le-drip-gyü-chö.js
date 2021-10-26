@@ -36,7 +36,7 @@ testGroups.push({
     { tibetan: "ཨོཾ་སརྦ་ནི་ཝ་ར་ཎ་བིཥྐཾ་བྷི་ནི་སྭཱ་ཧཱ།", transliteration: "oṁ sarva niwaraṇa biṣkaṁ bhini svāhā"},
     { tibetan: "ཨོཾ་ནཱི་ས་རཱ་ཡ་སྭཱ་ཧཱ།", transliteration: "oṁ nīsarāya svāhā"},
     { tibetan: "ཨོཾ་ཨཀྵ་ཧཱུྃ་ཕཊ།", transliteration: "oṁ akṣa hūṁ phaṭ", phonetics: "om akṣa hung phet"},
-    { tibetan: "ཨོཾ་སརྦ་མནྟ་ཎི་དཱ་ནཾ་ཀྵེ་མྃ་རྃ་ཧཱུྃ་ཀྵཿཧཿ", transliteration: "oṁ sarva mantaṇi dānaṁ khyé maṁ raṁ hūṁ khya haḥ"},
+    { tibetan: "ཨོཾ་སརྦ་མནྟ་ཎི་དཱ་ནཾ་ཀྵེ་མྃ་རྃ་ཧཱུྃ་ཀྵཿཧཿ", transliteration: "oṁ sarva mantaṇi dānaṁ khyé maṁ raṁ hūṁ khyaḥ haḥ"},
     { tibetan: "ཨོཾ་ཨཱ་ཀཱ་ཤ་གརྦྷ་ཡ་སྭཱ་ཧཱ།", transliteration: "oṁ ākāśagarbhaya svāhā"},
     { tibetan: "ཨོཾ་ཀྵི་ཧཿརཱ་ཛཱ་སྭཱ་ཧཱ།", transliteration: "oṁ kṣi haḥ rājā svāhā", phonetics: "om kshi ha radza soha"},
     { tibetan: "ཨོཾ་ཨཀྵ་ས་མ་ཏི་སྭཱ་ཧཱ།", transliteration: "oṁ akṣa samati svāhā"},

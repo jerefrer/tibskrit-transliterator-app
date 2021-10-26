@@ -10,6 +10,8 @@ var TibkritTransliterator = function(tibetan) {
           : word.transliteration
         if (replacement.last() == 'a') {
           replacement = replacement.slice(0, -1);
+          replaced = replaced.replace(new RegExp('(' + word.tibetan + ')ཱ་ཡ', 'g'), '$1āya');
+          replaced = replaced.replace(new RegExp('(' + word.tibetan + ')་ཡ', 'g'), '$1aya');
           replaced = replaced.replace(new RegExp(word.tibetan + '[་།༑༔]', 'g'), replacement + 'a ');
           replaced = replaced.replace(new RegExp(word.tibetan + 'ཿ', 'g'), replacement + (options.phonetics ? 'ah' : 'aḥ'));
         }
@@ -28,11 +30,10 @@ var TibkritTransliterator = function(tibetan) {
 }
 
 var replacementMap = [
-  { tibetan: 'བིདྱཱ', transliteration: 'bidyā' },
+  { tibetan: 'བིདྱ', transliteration: 'bidya' },
   { tibetan: 'ས་མནྟོ་ཥྞཱི་ཥ', transliteration: 'samantoṣṇīṣa', phonetics: 'samantoshnisha' },
   { tibetan: 'ཏ་ཐཱ་ག་ཏོཥྞི་ཥ', transliteration: 'tathāgatoṣṇīṣa', phonetics: 'tathagatoshnisha' },
   { tibetan: 'ཏ་ཐཱ་ག་ཏ་བྱཱ', transliteration: 'tathāgatabya' },
-  { tibetan: 'ཨཱ་ཀཱ་ཤ་གརྦྷ་ཡ', transliteration: 'ākāśagarbhaya', phonetics: 'akashagarbhaya' },
   { tibetan: 'ཨཱ་ཀཱ་ཤ་གརྦྷ', transliteration: 'ākāśagarbha', phonetics: 'akashagarbha' },
   { tibetan: 'ཀྵི་ཏི་གརྦྷ', transliteration: 'kṣitigarbha', phonetics: 'kshitigarbha' },
   { tibetan: 'ཨཀྵོ་བྷྱ', transliteration: 'akṣobhya', phonetics: 'akshobhya' },
@@ -46,8 +47,9 @@ var replacementMap = [
   { tibetan: 'ཙིརྟེ', transliteration: 'tsirté' },                             // Rinpoche's pronunciation, should be ca
   { tibetan: 'ཙིནྟ', transliteration: 'tsinta' },                              // Rinpoche's pronunciation, should be ca
   { tibetan: 'ཏ་ཀ་ཧ་ན་ད་ཧ་པ་ཙ', transliteration: 'taka hana daha patsa' },           // Rinpoche's pronunciation, should be ca
-  { tibetan: 'ཀྵེ་མྃ་རྃ་ཧཱུྃ་ཀྵཿཧཿ', transliteration: 'khyé maṁ raṁ hūṁ khya haḥ' },  // Rinpoche's pronunciation, should be kṣ twice
+  { tibetan: 'ཀྵེ་མྃ་རྃ་ཧཱུྃ་ཀྵཿ', transliteration: 'khyé maṁ raṁ hūṁ khyaḥ' },     // Rinpoche's pronunciation, should be kṣ twice
   { tibetan: 'ཀྵ་ཡཾ', transliteration: 'khayaṁ' },                             // Rinpoche's pronunciation, should be kṣ
+  { tibetan: 'བཛྲ་བིད་སྭཱ་ཧཱ', transliteration: 'vajra bi svāhā' },                // Rinpoche's pronunciation, to check
   { tibetan: 'དུཥྚཱན', transliteration: 'duṣṭēn', phonetics: 'dushten' },      // Rinpoche's pronunciation, to check
   { tibetan: 'བི་མ་ལ', transliteration: 'bimala', phonetics: 'bimala' },        // Rinpoche's pronunciation, to check
   { tibetan: 'བི་ཛ་ཡ', transliteration: 'bijaya' },                             // Rinpoche's pronunciation, to check
@@ -72,9 +74,9 @@ var replacementMap = [
   { tibetan: 'སུཾ་བྷ་ནཾ', transliteration: 'suṁbhanaṁ' },
   { tibetan: 'སུཾ་བྷ', transliteration: 'suṁbha' },
   { tibetan: 'ཝཱ་ཀྱེ་དཾ', transliteration: 'wākyédaṁ' },
-  { tibetan: 'ཀ་རུ་ཎི་ཀཱ་ཡ', transliteration: 'karuṇikāya' },
-  { tibetan: 'མ་ཧཱ་སཏྭ་ཡ', transliteration: 'mahāsatvaya' },
-  { tibetan: 'བོ་དྷི་སཏྭ་ཡ', transliteration: 'bodhisatvaya' },
+  { tibetan: 'ཀ་རུ་ཎི་ཀ', transliteration: 'karuṇika' },
+  { tibetan: 'མ་ཧཱ་སཏྭ', transliteration: 'mahāsatva' },
+  { tibetan: 'བོ་དྷི་སཏྭ', transliteration: 'bodhisatva' },
   { tibetan: 'བོ་དྷི་ས་ཏྭ', transliteration: 'bodhisatva' },
   { tibetan: 'བི་དྷཱ་ར་ཎཱི', transliteration: 'bidhāraṇī' },
   { tibetan: 'དྷཱ་རདྷཱ་ཀི', transliteration: 'dhāradhāki' },
@@ -105,21 +107,16 @@ var replacementMap = [
   { tibetan: 'ཀ་རི', transliteration: 'kari' },
   { tibetan: 'ཀུ་མ་རཱུ', transliteration: 'kumarū' },
   { tibetan: 'ཨམྲྀ་ཏོདྦྷ་པ', transliteration: 'amṛtod bhawa', phonetics: 'amritod bhawa' },
-  { tibetan: 'སམྱཀྶཾ་བུད་དྷཱ་ཡ', transliteration: 'samyak saṁbuddhāya' },
   { tibetan: 'སམྱཀྶཾ་བུད་དྷ', transliteration: 'samyak saṁbuddha' },
-  { tibetan: 'སམྱ་ཀྶཾ་བུདྡྷཱ་ཡ', transliteration: 'samyak saṁbuddhāya' },
   { tibetan: 'སམྱ་ཀྶཾ་བུདྡྷ', transliteration: 'samyak saṁbuddha' },
-  { tibetan: 'སཾ་བུད་དྷཱ་ཡ', transliteration: 'saṁbuddhāya' },
   { tibetan: 'སཾ་བུད་དྷ', transliteration: 'saṁbuddha' },
   { tibetan: 'བུདྡྷཱ་ནཱཾ', transliteration: 'buddhānāṁ' },
   { tibetan: 'བུདྡྷ', transliteration: 'buddha' },
   { tibetan: 'བྷོ་དྷི་ཙིཏྟ', transliteration: 'bhodhicitta' },
   { tibetan: 'བོ་དྷི་', transliteration: 'bodhi' },
-  { tibetan: 'མནྟྲ་ཡ', transliteration: 'mantraya' },
   { tibetan: 'མནྟྲ', transliteration: 'mantra' },
   { tibetan: 'ས་མནྟ', transliteration: 'samanta' },
   { tibetan: 'ནི་ཝ་ར་ཎ', transliteration: 'niwaraṇa' },
-  { tibetan: 'ཨཀྵོ', transliteration: 'akṣo', phonetics: 'aksho' },
   { tibetan: 'ཨཀྵ', transliteration: 'akṣa', phonetics: 'aksha' },
   { tibetan: 'ཏིཥྛ', transliteration: 'tiṣṭha' },
   { tibetan: 'པཱ་པཾ', transliteration: 'pāpaṁ' },
@@ -128,7 +125,7 @@ var replacementMap = [
   { tibetan: 'ཏཱ་རེ', transliteration: 'tāré' },
   { tibetan: 'ཤུ་ཏི', transliteration: 'śuti', phonetics: 'shuti' },
   { tibetan: 'སྨྲྀ་ཏི', transliteration: 'smṛti', phonetics: 'smriti' },
-  { tibetan: 'པྲཛྙཱ', transliteration: 'prajñā' },
+  { tibetan: 'པྲཛྙ', transliteration: 'prajña' },
   { tibetan: 'ཛྙཱ་ན', transliteration: 'jñāna' },
   { tibetan: 'ཙིཏྟ', transliteration: 'citta', phonetics: 'chitta' },
   { tibetan: 'པཱ་ར་མི་ཏཱ', transliteration: 'pāramitā' },
@@ -162,7 +159,7 @@ var replacementMap = [
   { tibetan: 'ནི་ནི་མཿ', transliteration: 'ninimaḥ' },
   { tibetan: 'ཨ་ཝ་ལོ་ཀི་ཏེ་ཤྭ་རཱ་ཡ', transliteration: 'avalokitéśvarāya' },
   { tibetan: 'ཨ་ཝ་ལོ་ཀི་ཏེ་ཤྭ་ར', transliteration: 'avalokitéśvara' },
-  { tibetan: 'ཨ་ཝ་ལོ་ཀི་ཏེ', transliteration: 'avalokité' },
+  { tibetan: 'ཨ་ཝ་ལོ་ཀི་ཏ', transliteration: 'avalokita' },
   { tibetan: 'ཨཱརྱ', transliteration: 'ārya' },
   { tibetan: 'བིརྱཱ', transliteration: 'biryā' },
   { tibetan: 'ཀཱ་རཿ', transliteration: 'kāraḥ', phonetics: 'kara' },
@@ -177,13 +174,11 @@ var replacementMap = [
   { tibetan: 'གུ་རུ', transliteration: 'guru' },
   { tibetan: 'སིདྡྷི', transliteration: 'siddhi' },
   { tibetan: 'གི་ནི', transliteration: 'gini' },
-  { tibetan: 'ཧྲི་ད་ཡཾ', transliteration: 'hridayaṁ' },
   { tibetan: 'ཧྲི་ད་ཡ', transliteration: 'hridaya' },
-  { tibetan: 'ཧྲྀ་ད་ཡཱཾ', transliteration: 'hṛdayāṁ', phonetics: 'hridayam' },
   { tibetan: 'ཧྲྀ་ད་ཡཾ', transliteration: 'hṛdayaṁ', phonetics: 'hridayam' },
   { tibetan: 'ཧྲྀ་ད་ཡ', transliteration: 'hṛdaya', phonetics: 'hridaya' },
   { tibetan: 'ཀ་མཱ་ལཱཀྵི', transliteration: 'kamālākṣi', phonetics: 'kamalakshi' },
-  { tibetan: 'མཱ་ལཱ', transliteration: 'mālā' },
+  { tibetan: 'མཱ་ལ', transliteration: 'māla' },
   { tibetan: 'མཱ་ར', transliteration: 'māra' },
   { tibetan: 'སིནྱ', transliteration: 'sinya' },
   { tibetan: 'བི་ནཱ་ཤ་ནི', transliteration: 'bināśani', phonetics: 'binashani' },
@@ -194,25 +189,22 @@ var replacementMap = [
   { tibetan: 'དྷཱ་ཏཱི', transliteration: 'dhātī' },
   { tibetan: 'དྷཱ་ར', transliteration: 'dhāra' },
   { tibetan: 'བིནྡུ', transliteration: 'bindu' },
-  { tibetan: 'མ་ཧཱ', transliteration: 'mahā' },
+  { tibetan: 'མ་ཧ', transliteration: 'maha' },
   { tibetan: 'སུ་ཁ', transliteration: 'sukha' },
   { tibetan: 'མ་ཎི་', transliteration: 'maṇi' },
   { tibetan: 'པདྨ', transliteration: 'padma' },
   { tibetan: 'ཀརྨ', transliteration: 'karma' },
   { tibetan: 'གཉྫོ', transliteration: 'gandzo' },
-  { tibetan: 'རཏྣཾ', transliteration: 'ratnaṁ' },
   { tibetan: 'རཏྣ', transliteration: 'ratna' },
   { tibetan: 'རཏ་ཎ', transliteration: 'ratṇa' },
   { tibetan: 'མུ་དྲཱ', transliteration: 'mudrā' },
   { tibetan: 'སཱ་ག་ར་', transliteration: 'sāgara' },
   { tibetan: 'བྷ་དྲ་', transliteration: 'bhadra' },
   { tibetan: 'ཙཀྲ', transliteration: 'cakra', phonetics: 'chakra' },
-  { tibetan: 'བི་ཀྲཱནྟེ', transliteration: 'bikrānté' },
   { tibetan: 'བི་ཀྲཱནྟ', transliteration: 'bikrānta' },
   { tibetan: 'ག་མི་ནི', transliteration: 'gamini' },
-  { tibetan: 'ཨ་མི་དྷེ་ཝཿ', transliteration: 'amidhéwaḥ' },
-  { tibetan: 'སམྦྷ་ཝཿ', transliteration: 'sambhawaḥ' },
-  { tibetan: 'སཾ་བྷ་བེ', transliteration: 'saṁbhawé' },
+  { tibetan: 'ཨ་མི་དྷེ་ཝ', transliteration: 'amidhéwa' },
+  { tibetan: 'སམྦྷ་ཝ', transliteration: 'sambhawa' },
   { tibetan: 'སཾ་བྷ་བ', transliteration: 'saṁbhawa' },
   { tibetan: 'ག་ག་ན་', transliteration: 'gagana' },
   { tibetan: 'བིཥྐཾ', transliteration: 'biṣkaṁ', phonetics: 'bishkam' },
@@ -235,26 +227,22 @@ var replacementMap = [
   { tibetan: 'པྲ་ཏི་ཧ་ན', transliteration: 'pratihana' },
   { tibetan: 'སྨ་ར', transliteration: 'samara' },
   { tibetan: 'ས་མ་ཡ', transliteration: 'samaya' },
-  { tibetan: 'པ་རཾ་པ་རཱ', transliteration: 'paraṁparā' },
+  { tibetan: 'པ་རཾ་པ་ར', transliteration: 'paraṁpara' },
   { tibetan: 'ཎི་མེ', transliteration: 'ṇimé' },
   { tibetan: 'མ་ནུ་ག་ཏ', transliteration: 'manugata' },
   { tibetan: 'ན་བྷུ་ཛེ', transliteration: 'nabhujé' },
   { tibetan: 'སིཾ་ཧ', transliteration: 'siṁha' },
   { tibetan: 'ནཱ་ད', transliteration: 'nāda' },
-  { tibetan: 'ཏདྱ་ཐཱ', transliteration: 'tadyathā' },
-  { tibetan: 'ཨ་མི་ཏ་བྷཱ་ཡ', transliteration: 'amitabhāya' },
-  { tibetan: 'ཨ་མི་ཏ་བྷཱ', transliteration: 'amitabhā' },
+  { tibetan: 'ཏདྱ་ཐ', transliteration: 'tadyatha' },
+  { tibetan: 'ཨ་མི་ཏ་བྷ', transliteration: 'amitabha' },
   { tibetan: 'ཨ་ཛི་ཏཉྫ་ཡ', transliteration: 'ajitenjaya', phonetics: "adzitendzaya" },
   { tibetan: 'ཙ་ར', transliteration: 'cara', phonetics: 'chara' },
   { tibetan: 'ཨ་ལཾ་ཀཱ་ར', transliteration: 'alaṁkāra' },
-  { tibetan: 'ཧ་ལ་ཧ་ལ', transliteration: 'hala hala' },
-  { tibetan: 'རཱ་ཛཱ་ཡ', transliteration: 'rājāya' },
-  { tibetan: 'རཱ་ཛཱ', transliteration: 'rājā' },
+  { tibetan: 'རཱ་ཛ', transliteration: 'rāja' },
   { tibetan: 'སྟྲཻ་ཡ', transliteration: 'straiya' },
   { tibetan: 'སྭ་སྟི', transliteration: 'svasti' },
   { tibetan: 'དྷཱི་ཀཱ་ནཱཾ', transliteration: 'dhīkānāṁ' },
   { tibetan: 'ཏ་ཐཱ་ག་ཏཱ་ནཱཾ', transliteration: 'tathāgatānāṁ' },
-  { tibetan: 'ཏ་ཐཱ་ག་ཏཱ་ཡ', transliteration: 'tathāgatāya' },
   { tibetan: 'ཏ་ཐཱ་ག་ཏ', transliteration: 'tathāgata' },
   { tibetan: 'ཨརྷ་ཏེ', transliteration: 'arhaté' },
   { tibetan: 'སམྱཀ་', transliteration: 'samyak' },
@@ -281,7 +269,7 @@ var replacementMap = [
   { tibetan: 'བི་པུ་ལ', transliteration: 'bipula' },
   { tibetan: 'པཱ་ཎ་ཌ་རི', transliteration: 'pāṇaḍari' },
   { tibetan: 'བཱ་སི་ནི', transliteration: 'vāsini' },
-  { tibetan: 'ཀ་མཱ་ལཱ', transliteration: 'kamālā' },
+  { tibetan: 'ཀ་མཱ་ལ', transliteration: 'kamāla' },
   { tibetan: 'ཨསྟ་པ་རི', transliteration: 'astapari' },
   { tibetan: 'བྷོ་གི', transliteration: 'bhogi' },
   { tibetan: 'ཨ་མོ་གྷ', transliteration: 'amogha' },
@@ -290,7 +278,6 @@ var replacementMap = [
   { tibetan: 'པྲ་བརྟ་ཡ', transliteration: 'prabartaya' },
   { tibetan: 'བརྟ་', transliteration: 'barta' },
   { tibetan: 'མཎྜ་ལ', transliteration: 'maṇḍala' },
-  { tibetan: 'ཨ་བྷི་ཥེ་ཀཾ', transliteration: 'abhiṣékaṁ', phonetics: 'abhishékam' },
   { tibetan: 'ཨ་བྷི་ཥེ་ཀ', transliteration: 'abhiṣéka', phonetics: 'abhishéka' },
   { tibetan: 'དུརྒ་ཏི', transliteration: 'durgati' },
   { tibetan: 'ཨཱ་ཡུརྡ་དེ', transliteration: 'āyurdadé' },
@@ -300,6 +287,7 @@ var replacementMap = [
   { tibetan: 'ཏྲ་ཊ', transliteration: 'traṭa', phonetics: 'tratra' },
   { tibetan: 'ཊ་ཊ', transliteration: 'ṭaṭa', phonetics: 'tratra' },
   { tibetan: 'ཧ་ན', transliteration: 'hana' },
+  { tibetan: 'ཧ་ལ', transliteration: 'hala' },
   { tibetan: 'མ་མ', transliteration: 'mama' },
   { tibetan: 'ཧུ་རུ', transliteration: 'huru' },
   { tibetan: 'རུ་ལུ', transliteration: 'rulu' },
@@ -315,9 +303,10 @@ var replacementMap = [
   { tibetan: 'ལ་ཧུ', transliteration: 'lahu' },
   { tibetan: 'ཛི་ན', transliteration: 'jina' },
   { tibetan: 'དུ་ཁེ', transliteration: 'dukhé' },
+  { tibetan: 'ཙཎྜ', transliteration: 'caṇḍa', phonetics: 'chandra' },
+  { tibetan: 'དྷཱ་ཏུ', transliteration: 'dhātu' },
 
   { tibetan: 'དྷཱིཿ', transliteration: 'dhīḥ', phonetics: 'dhi' },
-  { tibetan: 'ཏྲཱཾ', transliteration: 'trāṁ' },
   { tibetan: 'ཧྲཱིཿ', transliteration: 'hrīḥ', phonetics: 'hri' },
   { tibetan: 'བྷྲཱུྃ', transliteration: 'bhrūṁ' },
   { tibetan: 'ཊུཾ', transliteration: 'ṭuṁ', phonetics: 'trum' },
@@ -325,8 +314,6 @@ var replacementMap = [
   { tibetan: 'ཕཊ', transliteration: 'phaṭ', phonetics: 'phet' },
   { tibetan: 'ཏྲཊ', transliteration: 'traṭ', phonetics: 'tret' },
   { tibetan: 'ཀྵེ', transliteration: 'kṣé', phonetics: 'kshé' },
-  { tibetan: 'ཙཎྜ', transliteration: 'caṇḍa', phonetics: 'chandra' },
-  { tibetan: 'དྷཱ་ཏུ', transliteration: 'dhātu' },
 
   { tibetan: 'ཨོཾ', transliteration: 'oṁ' },
   { tibetan: 'ཨཱཿ', transliteration: 'āḥ' },
@@ -439,6 +426,6 @@ var replacementMap = [
   { tibetan: 'ྭ', transliteration: 'v' },
   { tibetan: '྄', transliteration: '' },
 ].map((hash) => {
-  hash.tibetan = removeUntranscribedPunctuationAndNormalize(hash.tibetan, hash.keepTrailingThsek)
+  hash.tibetan = removeUntranscribedPunctuationAndNormalize(hash.tibetan)
   return hash
 })

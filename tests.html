@@ -13,9 +13,11 @@
   <script src="vendor/javascripts/underscore.min.js"></script>
   <script src="vendor/javascripts/vue.js"></script>
   <script src="vendor/javascripts/diff.js"></script>
+  <script src="vendor/javascripts/normalize.js"></script>
   <script src="javascripts/utils.js"></script>
   <script src="javascripts/tibkrit-transliterator.js"></script>
   <script src="tests/var.js"></script>
+  <script src="tests/phonetics/mipham-le-drip-gyü-chö.js"></script>
   <script src="tests/transliteration/mipham-le-drip-gyü-chö.js"></script>
   <script>
     $(function() {
@@ -45,7 +47,7 @@
         },
         computed: {
           expected: function() {
-            return this.test.transliteration;
+            return this.test.result;
           },
           actual: function() {
             return this.test.transliterated;
@@ -131,8 +133,9 @@
           var ranTests = testGroups.map(function(testGroup) {
             testGroup.tests.each(function(test) {
               test.runTest = function() {
-                this.transliterated = new TibkritTransliterator(this.tibetan).transliterate();
-                return this.transliterated == this.transliteration;
+                var options = { phonetics: testGroup.phonetics };
+                this.transliterated = new TibkritTransliterator(this.tibetan).transliterate(options);
+                return this.transliterated == this.result;
               }
               test.pass = test.runTest();
               if (test.pass) passedCount++;

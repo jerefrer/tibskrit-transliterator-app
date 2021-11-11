@@ -13,6 +13,11 @@ Usage
 
 Paste your Tibetan in the left box. Enjoy the result.
 
+TODO
+-----------
+
+* Find the right transliteration for all the rules marked "to check"
+
 Credits
 -----------
 
@@ -28,7 +33,7 @@ License
 
 This software is licensed under the MIT License.
 
-Copyright Padmakara, 2021.
+Copyright Padmakara, 2021-present.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

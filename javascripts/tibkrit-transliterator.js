@@ -382,7 +382,7 @@ var replacementMap = [
   { tibetan: 'ཧ་ཧ', transliteration: 'haha' },
 
   { tibetan: 'མཿ', transliteration: 'maḥ' },
-  { tibetan: 'དད', transliteration: 'dé' },
+  { tibetan: 'དད', transliteration: 'dad' },
   { tibetan: 'སྟྲཻ', transliteration: 'strai' },
   { tibetan: 'ཨསྟ', transliteration: 'asta' },
   { tibetan: 'པྲ་', transliteration: 'pra' },

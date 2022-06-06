@@ -25,5 +25,10 @@ var removeUntranscribedPunctuationAndNormalize = function(tibetan, keepTrailingT
     .replace(/ཱུ/g, 'ཱུ')
     .replace(/ཱི/g, 'ཱི')
     .replace(/ཱྀ/g, 'ཱྀ')
-    .replace(/དྷ/g, 'དྷ');
+    .replace(/དྷ/g, 'དྷ')
+    .replace(/དྡྷ/g, 'དྡྷ')
+    .replace(/ྡྷ/g, 'ྡྷ')
+    .replace(/བྷ/g, 'བྷ')
+    .replace(/གྷ/g, 'གྷ')
+    .replace(/བྷ/g, 'བྷ');
 }

@@ -128,8 +128,6 @@
         el: '#main',
         data: function() {
           var passedCount = 0;
-          var textsPassed = 0;
-          var textsTotal = 0;
           var ranTests = testGroups.map(function(testGroup) {
             testGroup.tests.each(function(test) {
               test.runTest = function() {
@@ -139,10 +137,6 @@
               }
               test.pass = test.runTest();
               if (test.pass) passedCount++;
-              if (testGroup.includeInPercentage) {
-                if (test.pass) textsPassed++;
-                textsTotal++;
-              }
             })
             return testGroup;
           });
@@ -151,10 +145,7 @@
             tests: ranTests,
             passedCount: passedCount,
             total: total,
-            textsPassed: textsPassed,
-            textsTotal: textsTotal,
             percentage: passedCount / total * 100,
-            percentageTexts: textsPassed / textsTotal * 100,
           };
         },
         computed: {
@@ -171,11 +162,6 @@
                 <tr>
                   <td class="ui inverted header">
                     Total: <span v-bind:style="style">{{percentage.toPrecision(3)}}% ({{passedCount}}/{{total}})</span>
-                    <span v-if="passedCount != total">
-                       —
-                      Texts only:
-                      <span v-bind:style="style">{{percentageTexts.toPrecision(3)}}% ({{textsPassed}}/{{textsTotal}})</span>
-                    </span>
                   </td>
                 </tr>
               </thead>

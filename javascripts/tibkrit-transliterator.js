@@ -21,10 +21,10 @@ var TibkritTransliterator = function(tibetan) {
       this.line = replaced.replace(/་/g, ' ').replace(/ ?\^\^\^/g, '');
       if (options.capitalize) {
         this.line = this.line.capitalize();
-        this.line = this.line.replace(/ {2}(.)/g, (letter) => '    ' + letter.toUpperCase());
+        this.line = this.line.replace(/ {2,}(.)/g, (letter) => '    ' + letter.toUpperCase());
       }
       else
-        this.line = this.line.replace(/ {2}/g, '    ');
+        this.line = this.line.replace(/ {2,}/g, '    ');
       return this.line.trim();
     }
   };

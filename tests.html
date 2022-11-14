@@ -176,7 +176,7 @@
         mounted () {
           setTimeout(() => {
             var firstErrorIcon = $('.test.label .red.icon').first();
-            if (firstErrorIcon) {
+            if (firstErrorIcon.lenth) {
               firstErrorLabel = firstErrorIcon.parents('.test.label');
               $.scrollTo(firstErrorLabel, 300, { offset: -100 });
             }

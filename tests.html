@@ -76,8 +76,9 @@
             v-on:click="test.runTest()"
           >
             <span>
-              <i v-if=" test.pass" class="check green icon"></i>
-              <i v-if="!test.pass" class="times red icon"></i>
+              <i v-if="test.pending" class="question mark yellow icon"></i>
+              <i v-else-if=" test.pass" class="check green icon"></i>
+              <i v-else-if="!test.pass" class="times red icon"></i>
             </span>
             <span class="tibetan">{{test.tibetan}}</span>
             <test-diff
@@ -91,13 +92,15 @@
       Vue.component('results-group', {
         props: {
           name: String,
+          pending: Boolean,
           sentences: Boolean,
           tests: Array
         },
         data: function() {
-          var passedCount = this.tests.count(function(test) { return test.pass; });
+          var passedCount = this.tests.count((test) => test.pending || test.pass);
           var allPassed = passedCount == this.tests.length;
           return {
+            isPending: allPassed && (this.pending || this.tests.find((test) => test.pending)),
             allPassed: allPassed,
             opened: allPassed,
             passedCount: passedCount,
@@ -114,8 +117,9 @@
             </td>
             <td class="count">{{passedCount}}/{{total}}</td>
             <td class="result">
-              <i v-if=" allPassed" class="check green icon"></i>
-              <i v-if="!allPassed" class="times red icon"></i>
+              <i v-if="isPending" class="question mark yellow icon"></i>
+              <i v-else-if=" allPassed" class="check green icon"></i>
+              <i v-else-if="!allPassed" class="times red icon"></i>
             </td>
             <td>
               <test-result
@@ -134,6 +138,7 @@
         el: '#main',
         data: function() {
           var passedCount = 0;
+          var pendingCount = 0;
           var ranTests = testGroups.map(function(testGroup) {
             testGroup.tests.each(function(test) {
               test.runTest = function() {
@@ -142,14 +147,18 @@
                 return this.transliterated == this.result;
               }
               test.pass = test.runTest();
-              if (test.pass) passedCount++;
+              if (test.pass || test.pending)
+                passedCount++;
+              if (testGroup.pending || test.pending)
+                pendingCount++;
             })
             return testGroup;
           });
           var total = _(testGroups).pluck('tests').flatten().length;
           return {
-            tests: ranTests,
+            testGroups: ranTests,
             passedCount: passedCount,
+            pendingCount: pendingCount,
             total: total,
             percentage: passedCount / total * 100,
           };
@@ -157,7 +166,10 @@
         computed: {
           style: function() {
             return {
-              color: (this.passedCount == this.total) ? '#21ba45' : '#db2828'
+              color:
+                this.passedCount == this.total
+                ? this.pendingCount > 0 ? '#fbbd08' : '#21ba45'
+                : '#db2828'
             }
           }
         },
@@ -176,17 +188,27 @@
               <thead>
                 <tr>
                   <td class="ui inverted header">
-                    Total: <span v-bind:style="style">{{percentage.toPrecision(3)}}% ({{passedCount}}/{{total}})</span>
+                    Total:&nbsp;
+                    <span v-bind:style="style">
+                      {{percentage.toPrecision(3)}}%
+                      (
+                        {{passedCount}}/{{total}}
+                        <span v-if="pendingCount > 0">
+                          , {{pendingCount}} pending
+                        </span>
+                      )
+                    </span>
                   </td>
                 </tr>
               </thead>
               <tbody>
                 <results-group
-                 v-for="(test, index) in tests"
-                 v-bind:key="index"
-                 v-bind:name="test.name"
-                 v-bind:sentences="test.sentences"
-                 v-bind:tests="test.tests">
+                 v-for="(testGroup, index) in testGroups"
+                 :key="index"
+                 :name="testGroup.name"
+                 :pending="testGroup.pending"
+                 :sentences="testGroup.sentences"
+                 :tests="testGroup.tests">
                 </results-group>
               </tbody>
             </table>

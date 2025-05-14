@@ -342,7 +342,7 @@ var replacementMap = [
   { tibetan: "ཨ་?མ་?ར་?ཎ[ིྀ]་", transliteration: "amaraṇi" },
   {
     tibetan: "ཛཱི་?(ཝ|བ)ནྟི་?ཡེ་",
-    transliteration: "jīwantiyé",
+    transliteration: "jīvantiyé",
     phonetics: "dziwentiyé",
   },
   {
@@ -357,7 +357,7 @@ var replacementMap = [
   },
   {
     tibetan: "ཛཱི་?(ཝ|བ)ནྟི",
-    transliteration: "jīwanti",
+    transliteration: "jīvanti",
     phonetics: "dziwenti",
   },
   { tibetan: "ཡོ་གི་ནི", transliteration: "yogini" },
@@ -400,8 +400,8 @@ var replacementMap = [
   { tibetan: "སྨྲྀ་ཏི", transliteration: "smṛti", phonetics: "smriti" },
   { tibetan: "པྲཛྙ", transliteration: "prajña" },
   { tibetan: "ཛྙཱ་ན", transliteration: "jñāna", phonetics: "gyana" },
-  { tibetan: "ཝཱཀྐ", transliteration: "wakka" },
-  { tibetan: "ཝཱཀ", transliteration: "waka" },
+  { tibetan: "ཝཱཀྐ", transliteration: "vākka" },
+  { tibetan: "ཝཱཀ", transliteration: "vāka" },
   { tibetan: "ཙིཏྟ", transliteration: "citta", phonetics: "chitta" },
   { tibetan: "པཱ་ར་མི་ཏཱ", transliteration: "pāramitā" },
   { tibetan: "ཏུ་?ཏྟཱ་?རེ", transliteration: "tuttāré" },

@@ -1,6 +1,6 @@
 {
   "name": "tibetan-mantra-to-iast-and-phonetics",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A library to transliterate Tibetan mantras to IAST and phonetics",
   "type": "module",
   "main": "./src/index.js",

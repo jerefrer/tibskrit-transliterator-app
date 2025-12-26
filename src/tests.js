@@ -1,5 +1,7 @@
 import TibetanMantraToIastAndPhonetics from "./lib/tibetan-mantra-to-iast-and-phonetics.js";
 
+export { TibetanMantraToIastAndPhonetics };
+
 export const testGroups = [
   {
     name: "All mantras from Mipham Rinpoché's Le Drip Gyü Chö - Sanskrit transliteration",

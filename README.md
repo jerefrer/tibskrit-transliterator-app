@@ -1,7 +1,9 @@
-# mantra-transliterator
+# tibetan-mantra-to-iast-and-phonetics
 
-A naive attempt at converting the Sanskrit parts Unicode Tibetan into
+A naive attempt at converting the mantras from Unicode Tibetan into
 IAST (International Alphabet of Sanskrit Transliteration) and phonetics.
+
+![1766753098762](image/README/1766753098762.png)
 
 ## TODO
 

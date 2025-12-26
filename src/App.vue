@@ -12,7 +12,7 @@ const route = useRoute();
       <header class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-6">
           <h1 class="text-xl font-semibold text-slate-800 dark:text-slate-100">
-            Tibkrit Transliterator
+            Tibetan Mantra to IAST and Phonetics
           </h1>
           <nav v-if="route.name !== 'tests'" class="flex gap-1">
             <router-link

@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, ref } from "vue";
-import TibkritTransliterator from "../lib/tibkrit-transliterator.js";
+import TibetanMantraToIastAndPhonetics from "../lib/tibetan-mantra-to-iast-and-phonetics.js";
 
 const testGroups = ref([]);
 const loading = ref(true);
@@ -41,8 +41,8 @@ onMounted(async () => {
 
   testGroups.value.forEach((group) => {
     group.tests.forEach((test) => {
-      const options = { phonetics: group.phonetics };
-      test.transliterated = new TibkritTransliterator(
+      const options = { mode: group.phonetics ? "phonetics" : "iast" };
+      test.transliterated = new TibetanMantraToIastAndPhonetics(
         test.tibetan
       ).transliterate(options);
       test.pass = test.transliterated === test.result;

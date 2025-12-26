@@ -1,7 +1,7 @@
 <script setup>
 import * as Diff from "diff";
 import { computed, ref } from "vue";
-import TibkritTransliterator from "../lib/tibkrit-transliterator.js";
+import TibetanMantraToIastAndPhonetics from "../lib/tibetan-mantra-to-iast-and-phonetics.js";
 
 const defaultTibetan = `ཨོཾ་ཨཱཿཧཱུྃ།
 ཨོཾ་ཨཱཿཧཱུྃ་སྭཱ་ཧཱ།
@@ -31,7 +31,9 @@ const existingLines = computed(() => {
 const diffLines = computed(() => {
   return tibetanLines.value.map((line, index) => {
     const expected = existingLines.value[index] || "";
-    const actual = new TibkritTransliterator(line).transliterate();
+    const actual = new TibetanMantraToIastAndPhonetics(line).transliterate({
+      mode: "iast",
+    });
     const parts = Diff.diffChars(expected, actual);
     return { expected, actual, parts };
   });

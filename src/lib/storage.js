@@ -1,5 +1,5 @@
 const Storage = {
-  appKey: "Tibkrit-Transliterator",
+  appKey: "Tibetan-Mantra-To-Iast-And-Phonetics",
 
   localStorageSupported() {
     try {

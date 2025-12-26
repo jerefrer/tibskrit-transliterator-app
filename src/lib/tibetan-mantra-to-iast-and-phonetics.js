@@ -23,28 +23,30 @@ function last(str) {
   return str.charAt(str.length - 1);
 }
 
-const TibkritTransliterator = function (tibetan) {
+const TibetanMantraToIastAndPhonetics = function (tibetan) {
   return {
     tibetan: tibetan,
     line: "",
     transliterate: function (options = {}) {
+      const mode = options.mode || "iast";
       var replaced = removeUntranscribedPunctuationAndNormalize(
         this.tibetan,
         true
       );
       replacementMap.forEach(function (word) {
-        var replacement = options.phonetics
-          ? word.phonetics || normalizeString(word.transliteration)
-          : word.transliteration;
+        var replacement =
+          mode === "phonetics"
+            ? word.phonetics || normalizeString(word.transliteration)
+            : word.transliteration;
         replaced = replaced.replace(
           new RegExp("(" + word.tibetan + "[^་།༑༔]*)་ནཱཾ", "g"),
-          options.phonetics ? "$1་^^^nam" : "$1་^^^nāṁ"
+          mode === "phonetics" ? "$1་^^^nam" : "$1་^^^nāṁ"
         );
         if (last(replacement) == "a") {
           replacement = replacement.slice(0, -1);
           replaced = replaced.replace(
             new RegExp("(" + word.tibetan + ")ཱ་ཡ་", "g"),
-            options.phonetics ? "$1aya " : "$1āya "
+            mode === "phonetics" ? "$1aya " : "$1āya "
           );
           replaced = replaced.replace(
             new RegExp("(" + word.tibetan + ")་ཡ་", "g"),
@@ -56,7 +58,7 @@ const TibkritTransliterator = function (tibetan) {
           );
           replaced = replaced.replace(
             new RegExp(word.tibetan + "ཿ", "g"),
-            replacement + (options.phonetics ? "ah" : "aḥ")
+            replacement + (mode === "phonetics" ? "ah" : "aḥ")
           );
         }
         replaced = replaced.replace(new RegExp(word.tibetan, "g"), replacement);
@@ -1084,5 +1086,5 @@ const replacementMap = [
   return hash;
 });
 
-export default TibkritTransliterator;
+export default TibetanMantraToIastAndPhonetics;
 export { removeUntranscribedPunctuationAndNormalize };

@@ -5,7 +5,7 @@ import ClipboardButton from "../components/ClipboardButton.vue";
 import RadioButtons from "../components/RadioButtons.vue";
 import SliderCheckbox from "../components/SliderCheckbox.vue";
 import Storage from "../lib/storage.js";
-import TibkritTransliterator from "../lib/tibkrit-transliterator.js";
+import TibetanMantraToIastAndPhonetics from "../lib/tibetan-mantra-to-iast-and-phonetics.js";
 
 const defaultText = `ཨོཾ་ཨཱཿཧཱུྃ།
 ཨོཾ་ཨཱཿཧཱུྃ་སྭཱ་ཧཱ།
@@ -65,11 +65,13 @@ const lines = computed(() => {
 
 const convertedLines = computed(() => {
   const opts = {
-    phonetics: options.value.phonetics,
+    mode: options.value.phonetics ? "phonetics" : "iast",
     capitalize: options.value.capitalize,
   };
   return lines.value
-    .map((line) => new TibkritTransliterator(line).transliterate(opts))
+    .map((line) =>
+      new TibetanMantraToIastAndPhonetics(line).transliterate(opts)
+    )
     .join("\n");
 });
 
@@ -94,7 +96,7 @@ const transliterationChoices = [
 <template>
   <div>
     <!-- Controls -->
-    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+    <div class="flex flex-wrap gap-4 justify-between items-center mb-6">
       <RadioButtons
         :modelValue="options.phonetics"
         @update:modelValue="options.phonetics = $event"
@@ -107,11 +109,11 @@ const transliterationChoices = [
     </div>
 
     <!-- Main Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <!-- Tibetan Input -->
       <div class="relative">
         <label
-          class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wide"
+          class="block mb-2 text-xs font-medium tracking-wide uppercase text-slate-500 dark:text-slate-400"
         >
           Tibetan
         </label>
@@ -126,7 +128,7 @@ const transliterationChoices = [
       <!-- Transliteration Output -->
       <div class="relative">
         <label
-          class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wide"
+          class="block mb-2 text-xs font-medium tracking-wide uppercase text-slate-500 dark:text-slate-400"
         >
           Transliteration
         </label>

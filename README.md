@@ -1,25 +1,13 @@
-# tibkrit-transliterator
+# mantra-transliterator
 
-A naive attempt at processing Unicode Tibetan sanskrit transliteration into
-English sanskrit transliteration with diacritics and English phonetics.
+A naive attempt at converting the Sanskrit parts Unicode Tibetan into
+IAST (International Alphabet of Sanskrit Transliteration) and phonetics.
 
-Getting started
------------
+## TODO
 
-Just copy the repository locally.
+- Find the right transliteration for all the rules marked "to check"
 
-Usage
------------
-
-Paste your Tibetan in the left box. Enjoy the result.
-
-TODO
------------
-
-* Find the right transliteration for all the rules marked "to check"
-
-Credits
------------
+## Credits
 
 A zillion thanks to everybody involved in building an maintaining Vue.js,
 jQuery, SemanticUI, Sugar.js, Underscore.js, DevDocs, Zeal and Google Chrome
@@ -28,8 +16,7 @@ for making web development so easy and enjoyable.
 Through the virtue coming from this work, may all beings human and
 otherwise reach absolute freedom.
 
-License
------------
+## License
 
 This software is licensed under the MIT License.
 

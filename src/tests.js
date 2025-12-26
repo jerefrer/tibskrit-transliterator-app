@@ -59,7 +59,10 @@ export function runTests() {
   return results;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (
+  typeof process !== "undefined" &&
+  import.meta.url === `file://${process.argv[1]}`
+) {
   const results = runTests();
   let totalPassed = 0;
   let totalTests = 0;

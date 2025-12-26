@@ -3,7 +3,65 @@
 A naive attempt at converting the mantras from Unicode Tibetan into
 IAST (International Alphabet of Sanskrit Transliteration) and phonetics.
 
-![1766753098762](image/README/1766753098762.png)
+## Installation
+
+```bash
+npm install tibetan-mantra-to-iast-and-phonetics
+```
+
+### Basic Usage
+
+```javascript
+import { TibetanMantraToIastAndPhonetics } from "tibetan-mantra-to-iast-and-phonetics";
+
+// Transliterate to IAST
+const tibetan = "ཨོཾ་མ་ཎི་པདྨེ་ཧཱུྃ།";
+const transliterator = new TibetanMantraToIastAndPhonetics(tibetan);
+const iast = transliterator.transliterate({ mode: "iast" });
+console.log(iast); // "oṁ maṇi padmé hūṁ"
+
+// Transliterate to phonetics
+const phonetics = transliterator.transliterate({ mode: "phonetics" });
+console.log(phonetics); // "om mani padme hung"
+```
+
+### Options
+
+The `transliterate()` method accepts an options object:
+
+- `mode`: `'iast'` (default) or `'phonetics'`
+- `capitalize`: `true` or `false` (default) - Capitalizes the first letter
+
+```javascript
+const result = transliterator.transliterate({
+  mode: "iast",
+  capitalize: true,
+});
+```
+
+### Running Tests
+
+The package includes a test suite that can be imported and used:
+
+```javascript
+import {
+  testGroups,
+  runTests,
+} from "tibetan-mantra-to-iast-and-phonetics/tests";
+
+// Get test data
+console.log(testGroups);
+
+// Run all tests
+const results = runTests();
+console.log(results);
+```
+
+Or run tests from the command line:
+
+```bash
+npm test
+```
 
 ## TODO
 

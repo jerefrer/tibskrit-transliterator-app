@@ -11,12 +11,20 @@ importers:
       tibetan-normalizer:
         specifier: ^0.2.0
         version: 0.2.0
+      tibetan-sanskrit-transliteration-data:
+        specifier: ^0.1.2
+        version: 0.1.2
 
 packages:
 
   tibetan-normalizer@0.2.0:
     resolution: {integrity: sha512-KvqCBvscbxIcI+/2Q2GpUT4ZaRqYYaXwp+cjmdn3TkNIMr/GtLI5Avpfw9WIa0UZlURj2CNv6n2x+WR1auaUqQ==}
 
+  tibetan-sanskrit-transliteration-data@0.1.2:
+    resolution: {integrity: sha512-6rrG4DxgIU7fPdV+r+NFLCpePxKgYXmMNGpP0sARj/3Nbh02maOfD6skMkGrb30A2iV+SL/XfCceSMJE4x/7nA==}
+
 snapshots:
 
   tibetan-normalizer@0.2.0: {}
+
+  tibetan-sanskrit-transliteration-data@0.1.2: {}

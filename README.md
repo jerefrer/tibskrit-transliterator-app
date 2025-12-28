@@ -18,7 +18,7 @@ import { TibetanMantraToIastAndPhonetics } from "tibetan-mantra-to-iast-and-phon
 const tibetan = "ཨོཾ་མ་ཎི་པདྨེ་ཧཱུྃ།";
 const transliterator = new TibetanMantraToIastAndPhonetics(tibetan);
 const iast = transliterator.transliterate({ mode: "iast" });
-console.log(iast); // "oṁ maṇi padmé hūṁ"
+console.log(iast); // "oṃ maṇi padmé hūṃ"
 
 // Transliterate to phonetics
 const phonetics = transliterator.transliterate({ mode: "phonetics" });
@@ -31,11 +31,13 @@ The `transliterate()` method accepts an options object:
 
 - `mode`: `'iast'` (default) or `'phonetics'`
 - `capitalize`: `true` or `false` (default) - Capitalizes the first letter
+- `anusvaraStyle`: `'ṃ'` (default) or `'ṁ'` - Choose anusvara representation style (only applies to IAST mode)
 
 ```javascript
 const result = transliterator.transliterate({
   mode: "iast",
   capitalize: true,
+  anusvaraStyle: "ṁ", // Use ṁ instead of default ṃ
 });
 ```
 

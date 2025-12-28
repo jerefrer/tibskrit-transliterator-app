@@ -4,23 +4,37 @@ export { TibetanMantraToIastAndPhonetics };
 
 export const testGroups = [
   {
-    name: "All mantras from Mipham Rinpoché's Le Drip Gyü Chö - Sanskrit transliteration",
+    name: "All mantras from Mipham Rinpoché's Le Drip Gyü Chö - Sanskrit transliteration (default ṃ)",
     sentences: true,
     phonetics: false,
     tests: [
-      { tibetan: "ཨོཾ་ཨཱཿཧཱུྃ།", result: "oṁ āḥ hūṁ" },
-      { tibetan: "ཨོཾ་ཨཱཿཧཱུྃ་སྭཱ་ཧཱ།", result: "oṁ āḥ hūṁ svāhā" },
-      { tibetan: "ཨོཾ་ཧཱུྃ་ཏྲཱཾ་ཧྲཱིཿཨཱཿ", result: "oṁ hūṁ trāṁ hrīḥ āḥ" },
+      { tibetan: "ཨོཾ་ཨཱཿཧཱུྃ།", result: "oṃ āḥ hūṃ" },
+      { tibetan: "ཨོཾ་ཨཱཿཧཱུྃ་སྭཱ་ཧཱ།", result: "oṃ āḥ hūṃ svāhā" },
+      { tibetan: "ཨོཾ་ཧཱུྃ་ཏྲཱཾ་ཧྲཱིཿཨཱཿ", result: "oṃ hūṃ trāṃ hrīḥ āḥ" },
       { tibetan: "འཿཨཿཧཿཤཿསཿམཿ", result: "āḥ aḥ haḥ śaḥ saḥ maḥ" },
-      { tibetan: "ཨོཾ་བཛྲ་སཏྭ་ཧཱུྃ།", result: "oṁ vajra satva hūṁ" },
+      { tibetan: "ཨོཾ་བཛྲ་སཏྭ་ཧཱུྃ།", result: "oṃ vajra satva hūṃ" },
+      {
+        tibetan: "ན་མཿས་མནྟ་བུདྡྷཱ་ནཱཾ། ཨཱ་བཱི་ར་ཧཱུྃ་ཁཾ།",
+        result: "namaḥ samanta buddhānāṃ    āvīra hūṃ khaṃ",
+      },
+      { tibetan: "ཨོཾ་མ་ཎི་པདྨེ་ཧཱུྃ།", result: "oṃ maṇi padmé hūṃ" },
+      {
+        tibetan: "ཨོཾ་ཏཱ་རེ་ཏུཏྟཱ་རེ་ཏུ་རེ་སྭཱ་ཧཱ།",
+        result: "oṃ tāré tuttāré turé svāhā",
+      },
+    ],
+  },
+  {
+    name: "Anusvara style ṁ option",
+    sentences: true,
+    phonetics: false,
+    anusvaraStyle: "ṁ",
+    tests: [
+      { tibetan: "ཨོཾ་ཨཱཿཧཱུྃ།", result: "oṁ āḥ hūṁ" },
+      { tibetan: "ཨོཾ་མ་ཎི་པདྨེ་ཧཱུྃ།", result: "oṁ maṇi padmé hūṁ" },
       {
         tibetan: "ན་མཿས་མནྟ་བུདྡྷཱ་ནཱཾ། ཨཱ་བཱི་ར་ཧཱུྃ་ཁཾ།",
         result: "namaḥ samanta buddhānāṁ    āvīra hūṁ khaṁ",
-      },
-      { tibetan: "ཨོཾ་མ་ཎི་པདྨེ་ཧཱུྃ།", result: "oṁ maṇi padmé hūṁ" },
-      {
-        tibetan: "ཨོཾ་ཏཱ་རེ་ཏུཏྟཱ་རེ་ཏུ་རེ་སྭཱ་ཧཱ།",
-        result: "oṁ tāré tuttāré turé svāhā",
       },
     ],
   },
@@ -40,7 +54,10 @@ export function runTests() {
     const groupResults = {
       name: group.name,
       tests: group.tests.map((test) => {
-        const options = { mode: group.phonetics ? "phonetics" : "iast" };
+        const options = {
+          mode: group.phonetics ? "phonetics" : "iast",
+          anusvaraStyle: group.anusvaraStyle,
+        };
         const transliterated = new TibetanMantraToIastAndPhonetics(
           test.tibetan
         ).transliterate(options);
